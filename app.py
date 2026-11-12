@@ -273,7 +273,7 @@ def extract_leads():
         }
 
         try:
-            prompt_resp = requests.post(prompt_url, json=prompt_payload, headers=headers, timeout=30)
+            prompt_resp = requests.post(prompt_url, json=prompt_payload, headers=headers, timeout=120)
 
             if prompt_resp.status_code not in (200, 201):
                 print(f"PROMPT ERROR: {prompt_resp.status_code} - {prompt_resp.text}")
