@@ -1,0 +1,5 @@
+flask
+gunicorn
+apify-client
+requests
+python-dotenv
