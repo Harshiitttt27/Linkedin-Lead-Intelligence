@@ -187,7 +187,14 @@ def get_salesforce_token():
         "client_id": SF_CLIENT_ID,
         "client_secret": SF_CLIENT_SECRET
     }
+    
+    print(f"DEBUG: Fetching token from {token_url}")
+    print(f"DEBUG: Client ID exists? {bool(SF_CLIENT_ID)}, Secret exists? {bool(SF_CLIENT_SECRET)}")
+    
     response = requests.post(token_url, data=payload)
+    
+    print(f"DEBUG: Salesforce Auth Response: {response.status_code} - {response.text}")
+    
     if response.status_code == 200:
         return response.json().get("access_token")
     else:
