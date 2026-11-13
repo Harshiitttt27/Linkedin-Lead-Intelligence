@@ -490,8 +490,12 @@ def extract_leads():
     # 1) Claude: search, extract, analyze, score
     try:
         leads = find_leads(keyword, recency_text)
+    except anthropic.APIStatusError as e:
+        print("ANTHROPIC ERROR:", e.status_code, e.message, getattr(e, "request_id", ""))
+        return jsonify({"error": f"Anthropic {e.status_code}: {e.message}"[:300]}), 502
     except Exception as e:
-        return jsonify({"error": f"Claude error: {str(e)}"}), 500
+        print("ERROR:", repr(e))
+        return jsonify({"error": f"Server error: {str(e)}"[:300]}), 500
  
     # 2) Salesforce auth
     try:
